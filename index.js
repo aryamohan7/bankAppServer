@@ -34,9 +34,31 @@ app.use(express.json())
 app.post('/register',(req,res)=>{
     console.log(req.body.acno);
     const result = dataServices.register(req.body.acno,req.body.password,req.body.uname)
-    res.send(result.message)
+    res.status(result.statusCode).send(result)
 })
 
+app.post('/login',(req,res)=>{
+    console.log(req.body.acno);
+    const result = dataServices.login(req.body.acno,req.body.password)
+    res.status(result.statusCode).json(result)
+})
+app.post('/deposit',(req,res)=>{
+    console.log(req.body.acno);
+    const result = dataServices.deposit(req.body.acno,req.body.password,req.body.amt)
+    res.status(result.statusCode).send(result)
+})
+
+app.post('/withdraw',(req,res)=>{
+    console.log(req.body.acno);
+    const result = dataServices.deposit(req.body.acno,req.body.password,req.body.amt)
+    res.status(result.statusCode).send(result)
+})
+
+app.post('/getTransaction',(req,res)=>{
+    console.log(req.body.acno);
+    const result = dataServices.getTransaction(req.body.acno)
+    res.status(result.statusCode).json(result)
+})
 //set port to server
 
 app.listen(3000,()=>{
